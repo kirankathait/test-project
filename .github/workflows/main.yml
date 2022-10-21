@@ -1,0 +1,38 @@
+name: Build CI-CD Pipeline using Github Actions
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+jobs:
+
+  Deploy-on-push:
+    runs-on: self-hosted
+
+
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+
+    - name: Install SSH Key
+
+      uses: shimataro/ssh-key-action@v2.3.1
+
+      with:
+
+        key: ${{ secrets.SSH_PRIVATE_KEY }} 
+
+        known_hosts:  ${{ secrets.SSH_HOST }}
+
+        if_key_exists: ignore
+
+    
+
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    
+
+    - name: Deploy code to VM
+
+      run: ssh ubuntu@65.1.108.250 cd /var/www/your_domain && /usr/bin/git pull origin main"  
