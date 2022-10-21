@@ -35,4 +35,4 @@ jobs:
 
     - name: Deploy code to VM
 
-      run: ssh ubuntu@65.1.108.250 "cd /var/www/test-project && /usr/bin/git pull origin main"  
+      run: ssh ubuntu@65.1.108.250 "cd /var/www/html/ && /usr/bin/git pull origin main"  
